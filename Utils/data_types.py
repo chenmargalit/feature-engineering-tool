@@ -2,7 +2,7 @@ def map_dtypes_names(column_name:str, dtype: str):
     lower_case_dtype = dtype.lower()
     lower_case_col_name = column_name.lower()
     numeric_symbols = ['int', 'float']
-    indications_to_ignore = ['id']
+    indications_to_ignore = []
     for item_to_ignore in indications_to_ignore:
         if item_to_ignore in lower_case_col_name:
             return lower_case_dtype
