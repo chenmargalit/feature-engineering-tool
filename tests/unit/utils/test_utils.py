@@ -1,5 +1,8 @@
 import pandas as pd
 from Utils.data_types import map_dtypes, map_dtypes_names
+from Utils.path_utils import create_data_path
+
+data_path = create_data_path()
 
 
 def test_data_types():
@@ -11,10 +14,16 @@ def test_data_types():
 
 
 def test_map_dtypes():
-    df = pd.read_csv('sample_roseman_data.csv')
+    df = pd.read_csv(f'{data_path}/titanic.csv')
     types = map_dtypes(df)
     print(types)
-    assert types['number'] == ['Store', 'DayOfWeek', 'Sales', 'Customers', 'Open', 'Promo', 'StateHoliday', 'SchoolHoliday']
-    assert types['str_or_mixed'] == ['Date']
+    assert types['number'] == ['PassengerId', 'Survived', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']
+    assert types['str_or_mixed'] == ['Name', 'Sex', 'Ticket', 'Cabin', 'Embarked']
+
+
+def test_create_data_path():
+    path = create_data_path('titanic.csv')
+    assert 'feature-engineerer/sample_data/titanic.csv' in path
+
 
 
